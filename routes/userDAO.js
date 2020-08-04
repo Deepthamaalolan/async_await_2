@@ -1,15 +1,11 @@
 
 const Models = require("../lib/User");
- 
-function getUsers(x)
-{    console.log(x)
-    if(!Models.find(x)){
-        throw new error("Bad vibes");
-    }
-    else{
-        return x;
-    }
-
+#updated
+let getUsers = async (req) =>{
+    await (Models.find(req)).then((result)=>{ return  result
+  }).catch((err)=>{
+      console.log(err);
+  })
 }
 function createUser(x)
 {
