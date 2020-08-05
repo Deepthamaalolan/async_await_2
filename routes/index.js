@@ -12,7 +12,7 @@ else {
     username: req.body.username
   }
   const checkUser = await UserDAO.getUsers(criteria);
-  if (checkUser && checkUser.length==1) {
+  if (checkUser) {
     res.status(401).send('Username already registered')
   } 
   else {
@@ -50,6 +50,7 @@ else {
   try {
     let criteria = {username: req.body.username };   
     const checkUser= await UserDAO.getUsers(criteria);
+    console.log(checkUser)
     if (checkUser) {
       let criteria = {
         username: req.body.username,
@@ -60,8 +61,8 @@ else {
       if (checkPassword) {
         res.status(200).send('Logged in successfully!');
       } 
-      else {
-        res.status(401).send('Incorrect password');
+      else{
+        res.status(200).send('Password incorrect!');
       }
     } 
     else {
@@ -83,6 +84,7 @@ let forgetpassword = async (req, res) => {
     try {
       let criteria = {username: req.body.username };   
       const checkUser= await UserDAO.getUsers(criteria);
+      //console.log(checkUser)
       if (checkUser) {
         let criteria ={username :req.body.username,password: req.body.password};
         console.log("hello");
@@ -104,16 +106,13 @@ let forgetpassword = async (req, res) => {
     }
   };
   
-  
-
-     
-    
-
-    
- 
+   
 module.exports = {
   login:login,
   register:register,
   forgetpassword:forgetpassword
 
 };
+
+      
+        
