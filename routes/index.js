@@ -82,31 +82,37 @@ let forgetpassword = async (req, res) => {
   else {
   
     try {
-      let criteria = {username: req.body.username };   
-      const checkUser= await UserDAO.getUsers(criteria);
+      //let criteria = {username: req.body.username };   
+      //const checkUser= await UserDAO.getUsers(criteria);
       //console.log(checkUser)
-      if (checkUser) {
+      //if (checkUser) {
         let criteria ={username :req.body.username,password: req.body.password};
-        console.log("hello");
+        //console.log("hello");
         const updatePassword = await UserDAO.update(criteria);
         if (updatePassword) {
           res.status(200).send('updated successfully!');
         } 
         else {
-          res.status(401).send('enter another password');
+          res.status(401).send('username does not exist');
         }
       } 
-      else {
-        res.status(401).send('Username not exist!');
-      }
-      } 
+      //else {
+        //res.status(401).send('Username not exist!');
+     // }
+      //} 
       catch (error) {
         res.status(401).json({message:'wrong!!',error:error});
       }
     }
   };
   
-   
+  
+
+     
+    
+
+    
+ 
 module.exports = {
   login:login,
   register:register,
@@ -114,5 +120,5 @@ module.exports = {
 
 };
 
+  
       
-        
