@@ -8,7 +8,7 @@ async function getUsers (req) {
   //console.log(x)
   if(x){
     return x
-            
+            //return x
   }
   
 }
@@ -22,18 +22,31 @@ async function createUser (x)
 
 }
 
-async function update(y)
-  { const res = Models.updateOne({ username: y.username}, { $set: {password:y.password}}, { upsert: true });
-    return res
+//async function update(y)
+  //{ const res = Models.updateOne({ username: y.username}, { $set: {password:y.password}});
+    //return res
         
-    
-  }
+//}
+
+async function update(y){
+  const res= await Models.findOneAndUpdate({username:y.username}, {$set: {password:y.password}},{upsert:false})
+  return res
+}
+
+//async function update(y){
+//const res = Models.update({ username: y.username},{ $set: {password:y.password}},{ upsert: false })
+  //return res
+//}
+
 
 module.exports = {
   createUser: createUser,
   getUsers: getUsers,
   update:update
 };
+
+
+
 
         
 
