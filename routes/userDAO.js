@@ -5,20 +5,14 @@ const Models = require("../lib/User");
 
 async function getUsers (req) {
   let x=await Models.findOne(req)
-  
   //console.log(x)
   if(x){
     return x
-            //return x
+            
   }
   
 }
 
-//const getUsers = async (req) => {
-  //(await Models.find(req)).then((result)=>{ return result}).catch((err)=>{
-    //   console.log(err);
-    //})
-//s}
 
 async function createUser (x)
 {
@@ -26,29 +20,23 @@ async function createUser (x)
   {        return x
   }
 
-    }
+}
 
 async function update(y)
-  { if(await Models(y).save())
-    {return y
-      }
-    
-      else{
-        return new error("bad")
-      }
+  { const res = Models.updateOne({ username: y.username}, { $set: {password:y.password}}, { upsert: true });
+    return res
         
     
-    }
-
-
-
-
+  }
 
 module.exports = {
   createUser: createUser,
   getUsers: getUsers,
   update:update
 };
+
+        
+
 
 
 
